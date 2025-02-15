@@ -34,4 +34,8 @@ app.post("/signup", (req, res) => {
   res.sendStatus(501) //TODO
 })
 
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "./public/404.html"))
+})
+
 app.listen(PORT, () => console.log("server listening on port", PORT))

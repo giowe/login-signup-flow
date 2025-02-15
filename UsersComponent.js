@@ -16,11 +16,12 @@ class UsersComponent {
     fs.writeFileSync(this.statePath, JSON.stringify(this.users, null, 2))
   }
 
-  create(data) {
-    const email = data.email
-    const password = data.password
-
-    this.users.push({ email, password })
+  create(email, password) {
+    this.users[email] = {
+      email,
+      password
+    }
+    
     this.serialize()
   }
 
