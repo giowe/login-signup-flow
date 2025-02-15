@@ -20,18 +20,34 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/login.html"))
 })
 
-app.post("/login", (req, res) => {
-  console.log(req.body)
-  res.sendStatus(501) //TODO
+app.post("/login", async (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+  if (!usersComponent.getUser(email)) {
+    res.sendStatus(400)
+  } else {
+    const user = await usersComponent.login(email, password)
+    if (user) {
+      res.json(user)
+    } else {
+      res.sendStatus(400)
+    }
+  }  
 })
 
 app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/signup.html"))
 })
 
-app.post("/signup", (req, res) => {
-  console.log(req.body)
-  res.sendStatus(501) //TODO
+app.post("/signup", async (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+  if (usersComponent.getUser(email)) {
+    res.sendStatus(400)
+  } else {
+    await usersComponent.create(email, password)
+    res.sendStatus(200)
+  }
 })
 
 app.use((req, res) => {

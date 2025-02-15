@@ -10,6 +10,14 @@ Questo repository contiene una implementazione di base di un flusso di login e s
     npm install
     ```
 
+2. Valorizzare il file .env
+
+    ```bash
+    cp .env-sample .env
+    ```
+
+    valorizzare le variabili all'interno del file .env
+
 ## Utilizzo
 
 1. Avvia il server:
